@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Image, Dimensions, StyleSheet, Text, SafeAreaView, TextInput, Button, TouchableOpacity, TouchableHighlight } from 'react-native';
+import Bar from '../../components/Bar';
 import Colors from '../../shared/colors';
-import Bar from '../components/Bar';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -61,14 +61,14 @@ export default function RegisterScreen({ navigation}) {
       <Bar />
       {/* Hiển thị hình ảnh */}
       <Image
-        source={require('../assets/images/wolf2.png')} // Đường dẫn đến hình ảnh
+        source={require('../../assets/images/wolf2.png')} // Đường dẫn đến hình ảnh
         style={[styles.image, { width: windowWidth }]} // Kiểu dáng của hình ảnh, chiều rộng dựa trên kích thước cửa sổ
       />
       {/* Hiển thị 2 inputText để nhập tài khoản mật khẩu */}
       <View style={styles.borderInput}>
         <View style={[styles.border, emailError && styles.errorBorder]}>
           <Image
-            source={require('../assets/images/email.png')}
+            source={require('../../assets/images/email.png')}
             style={[styles.icon]}
           />
           <TextInput
@@ -82,7 +82,7 @@ export default function RegisterScreen({ navigation}) {
         </View>
         <View style={[styles.border, passwordError && styles.errorBorder]}>
           <Image
-            source={require('../assets/images/lock.png')}
+            source={require('../../assets/images/lock.png')}
             style={[styles.icon]}
           />
           <TextInput
@@ -96,7 +96,7 @@ export default function RegisterScreen({ navigation}) {
         </View>
         <View style={[styles.border, passwordError && styles.errorBorder]}>
           <Image
-            source={require('../assets/images/lock.png')}
+            source={require('../../assets/images/lock.png')}
             style={[styles.icon]}
           />
           <TextInput
@@ -120,14 +120,14 @@ export default function RegisterScreen({ navigation}) {
     <View style={styles.row}>
         <TouchableOpacity style={styles.borderButtonFace}>
             <Image
-            source={require('../assets/images/facebook.png')} // Đường dẫn đến hình ảnh
+            source={require('../../assets/images/facebook.png')} // Đường dẫn đến hình ảnh
             style={[styles.iconImage, { width: windowWidth }]} // Kiểu dáng của hình ảnh, chiều rộng dựa trên kích thước cửa sổ
             />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.borderButtonGoogle}>
         <Image
-            source={require('../assets/images/google.png')} // Đường dẫn đến hình ảnh
+            source={require('../../assets/images/google.png')} // Đường dẫn đến hình ảnh
             style={[styles.iconImage, { width: windowWidth }]} // Kiểu dáng của hình ảnh, chiều rộng dựa trên kích thước cửa sổ
             />
         </TouchableOpacity>

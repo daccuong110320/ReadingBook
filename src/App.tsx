@@ -3,15 +3,25 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeScreen from './pages/HomeScreen';
-import ProfileScreen from './pages/ProfileScreen';
-import NotificationsScreen from './pages/NotificationsScreen';
+import HomeScreen from './pages/Home/HomeScreen';
+import NotificationsScreen from './pages/Notifications/NotificationsScreen';
 import LibraryScreen from './pages/LibraryScreen';
-import LoginScreen from './pages/LoginScreen';
-import RegisterScreen from './pages/RegisterScreen';
+import LoginScreen from './pages/Login/LoginScreen';
+import RegisterScreen from './pages/Register/RegisterScreen';
+import ProfileScreen from './pages/More/MoreScreen';
+import DetailProfileScreen from './pages/More/Profile/DetailProfileScreen';
 
 import { Ionicons } from '@expo/vector-icons';
 import AuthContext from './utils/AuthContext';
+import Colors from './shared/colors';
+import { Provider as PaperProvider } from 'react-native-paper';
+import theme from './assets/themes/theme';
+
+import { StatusBar } from 'react-native';
+import ChangeInformationScreen from './pages/More/Profile/ChangeInformationScreen';
+import ResetPasswordScreen from './pages/More/Profile/ResetPasswordScreen';
+StatusBar.setBarStyle('dark-content');
+StatusBar.setBackgroundColor('white');
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -21,18 +31,18 @@ const HomeTabs = ({ isLoggedIn }) => {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: 'black',
+        tabBarActiveTintColor: Colors.blue,
         tabBarInactiveTintColor: 'gray',
       }}
     >
       <Tab.Screen
-        name="Library"
-        component={LibraryScreen}
+        name="Notifications"
+        component={NotificationsScreen}
         options={{
           tabBarLabel: () => null,
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="book" size={size} color={color} />
+            <Ionicons name="notifications" size={size} color={color} />
           ),
         }}
       />
@@ -48,18 +58,18 @@ const HomeTabs = ({ isLoggedIn }) => {
         }}
       />
       <Tab.Screen
-        name="Notifications"
-        component={NotificationsScreen}
+        name="Library"
+        component={LibraryScreen}
         options={{
           tabBarLabel: () => null,
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="notifications" size={size} color={color} />
+            <Ionicons name="book" size={size} color={color} />
           ),
         }}
       />
       <Tab.Screen
-  name="Profile"
+  name="MoreScreen"
   options={{
     tabBarLabel: () => null,
     headerShown: false,
@@ -89,18 +99,23 @@ const App = () => {
   
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, updateLoggedInStatus }}>
-      <NavigationContainer>
-        <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}>
-          <Stack.Screen name="HomeTabs">
-            {() => <HomeTabs isLoggedIn={isLoggedIn} />}
-          </Stack.Screen>
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="Register" component={RegisterScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+       <PaperProvider theme={theme}>
+        <NavigationContainer>
+          <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="HomeTabs">
+              {() => <HomeTabs isLoggedIn={isLoggedIn} />}
+            </Stack.Screen>
+            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="DetailProfile" component={DetailProfileScreen} />
+            <Stack.Screen name="ChangeInformation" component={ChangeInformationScreen} />
+            <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} /> 
+          </Stack.Navigator>
+        </NavigationContainer>
+       </PaperProvider>
     </AuthContext.Provider>
   );
 };

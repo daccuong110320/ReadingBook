@@ -1,18 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Image, Dimensions, StyleSheet, Text, SafeAreaView, TextInput, Button, TouchableOpacity, TouchableHighlight } from 'react-native';
 import Colors from '../../shared/colors';
-import Bar from '../components/Bar';
+import Bar from '../../components/Bar';
 import { Ionicons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import AuthContext from '../../utils/AuthContext';
 
-export default function NotificationsScreen({ navigation }) {
+function LoginScreen({ navigation }) {
   const windowWidth = Dimensions.get('window').width;
+  const { updateLoggedInStatus } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  
+  const goToRegisterScreen = () => {
+    navigation.navigate('Register');
+  };
 
+  const handleSignupPress = () => {
+    goToRegisterScreen();
+    console.log('Signup pressed');
+  };
+  
   const handleLinkPress = (link) => {
     // Xử lý sự kiện khi nhấn vào liên kết
     console.log('Link pressed:', link);
@@ -35,15 +46,22 @@ export default function NotificationsScreen({ navigation }) {
       console.log('Email and password are required');
       return;
     }
+    // Sau khi đăng nhập thành công, cập nhật giá trị isLoggedIn
+    // Điều hướng đến HomeScreen trong HomeTabs
+    navigation.navigate('HomeTabs', { screen: 'Home' });
+    updateLoggedInStatus(true);
 
     // Xử lý sự kiện khi nhấn vào nút Login
     console.log('Login pressed');
     // Thực hiện các xử lý khác (ví dụ: gọi API đăng nhập, kiểm tra thông tin đăng nhập, vv.)
   };
 
-  const handleSignupPress = () => {
-    navigation.navigate('Register');
-    console.log('Signup pressed');
+  const handleFacebookPress = () => {
+    console.log('Facebook pressed');
+  };
+
+  const handleGooglePress = () => {
+    console.log('Google pressed');
   };
 
   const handleResetEmailPress = () => {
@@ -59,16 +77,20 @@ export default function NotificationsScreen({ navigation }) {
   return (
     <View style={styles.background}>
       <Bar />
+      {/* Thêm nút chuyển đến màn hình khác */}
+      <TouchableOpacity style={styles.rightButton}>
+        <Ionicons name="language" size={24} color="black" />
+      </TouchableOpacity>
       {/* Hiển thị hình ảnh */}
       <Image
-        source={require('../assets/images/wolf2.png')} // Đường dẫn đến hình ảnh
+        source={require('../../assets/images/wolf2.png')} // Đường dẫn đến hình ảnh
         style={[styles.image, { width: windowWidth }]} // Kiểu dáng của hình ảnh, chiều rộng dựa trên kích thước cửa sổ
       />
       {/* Hiển thị 2 inputText để nhập tài khoản mật khẩu */}
       <View style={styles.borderInput}>
         <View style={[styles.border, emailError && styles.errorBorder]}>
           <Image
-            source={require('../assets/images/email.png')}
+            source={require('../../assets/images/email.png')}
             style={[styles.icon]}
           />
           <TextInput
@@ -82,7 +104,7 @@ export default function NotificationsScreen({ navigation }) {
         </View>
         <View style={[styles.border, passwordError && styles.errorBorder]}>
           <Image
-            source={require('../assets/images/lock.png')}
+            source={require('../../assets/images/lock.png')}
             style={[styles.icon]}
           />
           <TextInput
@@ -94,45 +116,51 @@ export default function NotificationsScreen({ navigation }) {
           />
           {passwordError && <Text style={styles.errorMessage}>Please enter your password</Text>}
         </View>
-        <View style={[styles.border, passwordError && styles.errorBorder]}>
-          <Image
-            source={require('../assets/images/lock.png')}
-            style={[styles.icon]}
-          />
-          <TextInput
-            style={styles.inputText}
-            placeholder="Varify Password"
-            placeholderTextColor="gray"
-            value={password}
-            onChangeText={setPassword}
-          />
-          {passwordError && <Text style={styles.errorMessage}>Password dose not match!</Text>}
+      </View>
+      
+      {/* Chèn các button đăng nhập */}
+      <View>
+        {/*   Login */}
+        <View>
+          <TouchableOpacity style={styles.borderButtonLogin} onPress={handleLoginPress}>
+            <Text style={styles.textinButonLogin}>Login</Text>
+          </TouchableOpacity>
+        </View>
+        {/* Face and Goo */}
+        <View style={styles.row}>
+            <TouchableOpacity style={styles.borderButtonFace} onPress={handleFacebookPress}>
+              <Image
+                source={require('../../assets/images/facebook.png')} // Đường dẫn đến hình ảnh
+                style={[styles.iconImage, { width: windowWidth }]} // Kiểu dáng của hình ảnh, chiều rộng dựa trên kích thước cửa sổ
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.borderButtonGoogle} onPress={handleGooglePress}>
+            <Image
+                source={require('../../assets/images/google.png')} // Đường dẫn đến hình ảnh
+                style={[styles.iconImage, { width: windowWidth }]} // Kiểu dáng của hình ảnh, chiều rộng dựa trên kích thước cửa sổ
+              />
+            </TouchableOpacity>
+        </View>
+        {/* Signup */}
+        <View style={styles.row}>
+          <TouchableOpacity onPress={handleSignupPress} style={styles.borderButtonSignup}>
+              <Text style={styles.textinButonSignup}>Signup</Text>
+          </TouchableOpacity>
         </View>
       </View>
+      {/* Chèn hai nút reset password */}
+      <View style={styles.container}>
+        <View style={styles.row}>
+            <TouchableOpacity style={styles.noBorder}>
+                <Text style={styles.textinButtonReset}>Resend activation email</Text>
+            </TouchableOpacity>
 
-    {/*   Login */}
-    <View>
-        <TouchableOpacity style={styles.borderButtonLogin} onPress={handleLoginPress}>
-        <Text style={styles.textinButonLogin}>Signup</Text>
-        </TouchableOpacity>
-    </View>
-    {/* Face and Goo */}
-    <View style={styles.row}>
-        <TouchableOpacity style={styles.borderButtonFace}>
-            <Image
-            source={require('../assets/images/facebook.png')} // Đường dẫn đến hình ảnh
-            style={[styles.iconImage, { width: windowWidth }]} // Kiểu dáng của hình ảnh, chiều rộng dựa trên kích thước cửa sổ
-            />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.borderButtonGoogle}>
-        <Image
-            source={require('../assets/images/google.png')} // Đường dẫn đến hình ảnh
-            style={[styles.iconImage, { width: windowWidth }]} // Kiểu dáng của hình ảnh, chiều rộng dựa trên kích thước cửa sổ
-            />
-        </TouchableOpacity>
-    </View>
-
+            <TouchableOpacity style={styles.noBorder}>
+                <Text style={styles.textinButtonReset}>Forgot password</Text>
+            </TouchableOpacity>
+        </View>
+      </View>
       {/* Chèn các điều khoản và chính sách */}
       <View style={styles.container1}>
           <Text style={styles.text}>
@@ -200,7 +228,7 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   borderInput: {
-    marginTop: 90, // Khoảng cách từ trên xuống cho văn 
+    marginTop: 50, // Khoảng cách từ trên xuống cho văn 
   },
   image: {
     resizeMode: 'contain', // Chế độ hiển thị hình ảnh
@@ -238,16 +266,18 @@ const styles = StyleSheet.create({
   },
   text:{
     color:Colors.darkgray,
-    fontSize: 11,
+    fontSize:11,
     padding:10,
   },
   linkText: {
     color: 'blue',
-    fontSize: 11,
+    fontSize:11,
+    fontStyle:'italic',
   },
-  borderButtonFace: {
+  borderButtonSignup: {
     margin:10,
     marginLeft:15,
+    marginRight:15,
     marginTop:5,
     borderRadius:18,
     height:35,
@@ -257,13 +287,29 @@ const styles = StyleSheet.create({
     borderColor:Colors.border,
     borderWidth:1,
     borderBottomWidth:3,
+    flex:1,
+  },
+  borderButtonFace: {
+    marginBottom:10,
+    marginLeft:15,
+    marginEnd:15,
+    marginTop:5,
+    borderRadius:18,
+    height:35,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor:Colors.light,
+    borderColor:Colors.border,
+    borderWidth:1,
+    borderBottomWidth:2,
     flexBasis:50,
     flexGrow:1,
   },
   borderButtonGoogle: {
-    margin:10,
+    marginBottom:10,
     marginRight:15,
     marginTop:5,
+    marginStart:15,
     borderRadius:18,
     height:35,
     alignItems: 'center',
@@ -287,7 +333,6 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection:'row',
-    justifyContent: 'space-between',
   },
   container: {
     flex: 1,
@@ -298,6 +343,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems: 'center',
     paddingHorizontal: 50,
+    alignContent: 'center',
   },
   rightButton: {
     position: 'absolute',
@@ -312,3 +358,5 @@ const styles = StyleSheet.create({
     height: 25,
   },
 });
+
+export default LoginScreen;

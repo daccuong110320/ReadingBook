@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeScreen from './pages/Home/HomeScreen';
 import NotificationsScreen from './pages/Notifications/NotificationsScreen';
-import LibraryScreen from './pages/LibraryScreen';
 import LoginScreen from './pages/Login/LoginScreen';
 import RegisterScreen from './pages/Register/RegisterScreen';
 import ProfileScreen from './pages/More/MoreScreen';
@@ -20,6 +19,8 @@ import theme from './assets/themes/theme';
 import { StatusBar } from 'react-native';
 import ChangeInformationScreen from './pages/More/Profile/ChangeInformationScreen';
 import ResetPasswordScreen from './pages/More/Profile/ResetPasswordScreen';
+import ProductSreen from './pages/Products/ProductScreen';
+import NewProductScreen from './pages/Products/NewProductScreen';
 StatusBar.setBarStyle('dark-content');
 StatusBar.setBackgroundColor('white');
 
@@ -39,7 +40,7 @@ const HomeTabs = ({ isLoggedIn }) => {
         name="Notifications"
         component={NotificationsScreen}
         options={{
-          tabBarLabel: () => null,
+          tabBarLabel: 'Notifications',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="notifications" size={size} color={color} />
@@ -50,7 +51,7 @@ const HomeTabs = ({ isLoggedIn }) => {
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarLabel: () => null,
+          tabBarLabel: 'Home',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
@@ -58,23 +59,23 @@ const HomeTabs = ({ isLoggedIn }) => {
         }}
       />
       <Tab.Screen
-        name="Library"
-        component={LibraryScreen}
+        name="Product"
+        component={ProductSreen}
         options={{
-          tabBarLabel: () => null,
+          tabBarLabel: 'Products',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="book" size={size} color={color} />
+            <Ionicons name="basket" size={size} color={color} />
           ),
         }}
       />
       <Tab.Screen
   name="MoreScreen"
   options={{
-    tabBarLabel: () => null,
+    tabBarLabel: 'More',
     headerShown: false,
     tabBarIcon: ({ color, size }) => (
-      <Ionicons name="person" size={size} color={color} />
+      <Ionicons name="list" size={size} color={color} />
     ),
   }}
 >
@@ -113,6 +114,8 @@ const App = () => {
             <Stack.Screen name="DetailProfile" component={DetailProfileScreen} />
             <Stack.Screen name="ChangeInformation" component={ChangeInformationScreen} />
             <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} /> 
+
+            <Stack.Screen name="NewProduct" component={NewProductScreen} /> 
           </Stack.Navigator>
         </NavigationContainer>
        </PaperProvider>

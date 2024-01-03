@@ -9,4 +9,5 @@ export default {
     silver: "#E3E3E3",
     diamond: "#4AA5F8",
     golden: "#FFD700",
+    green: "#1DB954",
   };

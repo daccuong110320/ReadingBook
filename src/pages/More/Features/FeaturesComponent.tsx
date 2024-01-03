@@ -1,22 +1,24 @@
 import React from 'react';
 import { View, TouchableOpacity, ScrollView, Text, StyleSheet } from 'react-native';
+import { Ionicons } from 'react-native-vector-icons';
 import Colors from '../../../shared/colors';
 
 const FeaturesComponent = () => {
   // Danh sách button
   const buttons = [
-    { id: 1, label: 'Button 1' },
-    { id: 2, label: 'Button 2' },
-    { id: 3, label: 'Button 3' },
-    { id: 4, label: 'Button 4' },
-    { id: 5, label: 'Button 5' },
-    { id: 6, label: 'Button 6' },
-    { id: 7, label: 'Button 7' },
-    { id: 8, label: 'Button 8' },
-    { id: 9, label: 'Button 9' },
-    { id: 10, label: 'Button 10' },
-    { id: 11, label: 'Button 11' },
-    { id: 12, label: 'Button 12' },
+    { id: 1, label: 'Button 1', icon: 'ios-checkmark-circle-outline' },
+    { id: 2, label: 'Button 2', icon: 'ios-close-circle-outline' },
+    { id: 3, label: 'Button 1', icon: 'ios-checkmark-circle-outline' },
+    { id: 4, label: 'Button 2', icon: 'ios-close-circle-outline' },
+    { id: 5, label: 'Button 1', icon: 'ios-checkmark-circle-outline' },
+    { id: 6, label: 'Button 2', icon: 'ios-close-circle-outline' },
+    { id: 7, label: 'Button 1', icon: 'ios-checkmark-circle-outline' },
+    { id: 8, label: 'Button 2', icon: 'ios-close-circle-outline' },
+    { id: 9, label: 'Button 1', icon: 'ios-checkmark-circle-outline' },
+    { id: 10, label: 'Button 2', icon: 'ios-close-circle-outline' },
+    { id: 11, label: 'Button 1', icon: 'ios-checkmark-circle-outline' },
+    { id: 12, label: 'Button 2', icon: 'ios-close-circle-outline' },
+    // Thêm các mục khác vào đây
   ];
 
   // Tạo hàm xử lý khi button được nhấn
@@ -32,6 +34,9 @@ const FeaturesComponent = () => {
         onPress={() => handlePress(item.id)}
         key={item.id}
       >
+        <View style={styles.iconContainer}>
+          <Ionicons name={item.icon} size={24} style={styles.icon} />
+        </View>
         <Text style={styles.buttonLabel}>{item.label}</Text>
       </TouchableOpacity>
     ));
@@ -65,11 +70,22 @@ const styles = StyleSheet.create({
     margin: 5,
     backgroundColor: Colors.background,
     borderRadius: 6,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    flexDirection: 'row',
+    padding:10,
+  },
+  iconContainer: {
+    marginRight: 8,
+  },
+  icon: {
+    color: Colors.icon,
+    padding:10,
+    paddingEnd:0,
   },
   buttonLabel: {
     fontSize: 16,
+    paddingStart:5,
   },
 });
 

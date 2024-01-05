@@ -3,6 +3,7 @@ export default {
     background:"#ffffff",
     border: "#dddddd",
     darkgray: "#323232",
+    gray: "808080",
     blue: "#1DA1F2",
     light: "#fafafa",
     backgroundHome: "#eeeeee",

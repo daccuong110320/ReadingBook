@@ -17,7 +17,7 @@ const DetailProfileScreen = ({ navigation }) => {
     <SafeAreaView style={styles.safeArea}>
         <View style={styles.header}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Ionicons name="arrow-back" size={24} color="black" />
+                <Ionicons name="arrow-back" size={30} color="black" />
             </TouchableOpacity>
             <Text style={styles.headerText}>Nguyễn Đắc Cường</Text>
             <TouchableOpacity onPress={() => handleInfoIconPress()}>
@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     },
   headerText: {
+    flex:1,
     fontSize: 20,
     fontWeight: 'bold',
     marginLeft: 10,

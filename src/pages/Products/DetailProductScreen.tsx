@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, TextInput, Image, ScrollView } from 'react-native';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import Colors from '../../shared/colors';
 import { Dimensions } from 'react-native';
 
-const NewProductScreen = ({ navigation }) => {
+const DetailProductScreen = ({ navigation }) => {
     const screenWidth = Dimensions.get('window').width;
     const handleSave = () => {
         //Lưu và thoát ra
@@ -21,12 +21,12 @@ const NewProductScreen = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name="arrow-back" size={30} color="black" />
           </TouchableOpacity>
-          <Text style={styles.headerText}>New Product</Text>
-          <TouchableOpacity onPress={handleSave}>
-            <Text style={[styles.blueText, {marginRight: 10, padding: 5}]}>Save</Text>
+          <Text style={styles.headerText}>Name</Text>
+          <TouchableOpacity onPress={handleEllipsisPress} style={[{marginRight: 20,}]}>
+            <Ionicons name="pencil" size={24} color="blue" />
           </TouchableOpacity>
           <TouchableOpacity onPress={handleEllipsisPress}>
-            <FontAwesome name="plus-square" size={30} color="#1DA1F2" />
+            <Ionicons name="trash-bin" size={24} color="red" />
           </TouchableOpacity>
         </View>
         <View style={styles.container}>
@@ -178,4 +178,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NewProductScreen;
+export default DetailProductScreen;

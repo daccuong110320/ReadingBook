@@ -35,7 +35,7 @@ const ResetPasswordScreen = ({ navigation }) => {
   const handleDonePress = () => {
     if (isFormValid()) {
       // Navigate to HAHA screen
-      navigation.navigate('HAHA');
+      navigation.navigate('DetailProfile');
     }
   };
 

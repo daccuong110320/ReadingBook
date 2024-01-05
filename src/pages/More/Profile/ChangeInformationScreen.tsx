@@ -75,8 +75,8 @@ const ChangeInformation = ({ navigation }) => {
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons name="arrow-back" size={20} color="black" />
+          <TouchableOpacity style={[{padding: 5}]} onPress={() => navigation.goBack()}>
+            <Ionicons name="arrow-back" size={30} color="black" />
           </TouchableOpacity>
           <Text style={styles.headerText}>Edit user information</Text>
         </View>
@@ -90,12 +90,12 @@ const ChangeInformation = ({ navigation }) => {
             <Text style={styles.textLeft}>Username</Text>
             <TextInput
               style={styles.textRight}
-              value={username}
+              placeholder='Username'
               onChangeText={(text) => setUsername(text)}
               onFocus={() => setUsernameFocused(true)}
               onBlur={() => setUsernameFocused(false)}
             />
-            <TouchableOpacity onPress={() => handleReset('username')}>
+            <TouchableOpacity style={[{padding: 15}]} onPress={() => handleReset('username')}>
               <Ionicons name="refresh" size={20} color="black" />
             </TouchableOpacity>
           </View>
@@ -108,12 +108,12 @@ const ChangeInformation = ({ navigation }) => {
             <Text style={styles.textLeft}>User Name</Text>
             <TextInput
               style={styles.textRight}
-              value={fullName}
+              placeholder='User name'
               onChangeText={(text) => setFullName(text)}
               onFocus={() => setFullNameFocused(true)}
               onBlur={() => setFullNameFocused(false)}
             />
-            <TouchableOpacity onPress={() => handleReset('fullName')}>
+            <TouchableOpacity style={[{padding: 15}]} onPress={() => handleReset('fullName')}>
               <Ionicons name="refresh" size={20} color="black" />
             </TouchableOpacity>
           </View>
@@ -126,12 +126,12 @@ const ChangeInformation = ({ navigation }) => {
             <Text style={styles.textLeft}>Phone Number</Text>
             <TextInput
               style={styles.textRight}
-              value={phoneNumber}
+              placeholder='Phone number'
               onChangeText={(text) => setPhoneNumber(text)}
               onFocus={() => setPhoneNumberFocused(true)}
               onBlur={() => setPhoneNumberFocused(false)}
             />
-            <TouchableOpacity onPress={() => handleReset('phoneNumber')}>
+            <TouchableOpacity style={[{padding: 15}]} onPress={() => handleReset('phoneNumber')}>
               <Ionicons name="refresh" size={20} color="black" />
             </TouchableOpacity>
           </View>
@@ -144,12 +144,12 @@ const ChangeInformation = ({ navigation }) => {
             <Text style={styles.textLeft}>Date of birth</Text>
             <TextInput
               style={styles.textRight}
-              value={dateOfBirth}
+              placeholder='Date'
               onChangeText={(text) => setDateOfBirth(text)}
               onFocus={() => setDateOfBirthFocused(true)}
               onBlur={() => setDateOfBirthFocused(false)}
             />
-            <TouchableOpacity onPress={() => handleReset('dateOfBirth')}>
+            <TouchableOpacity style={[{padding: 15}]} onPress={() => handleReset('dateOfBirth')}>
               <Ionicons name="refresh" size={20} color="black" />
             </TouchableOpacity>
           </View>
@@ -162,15 +162,13 @@ const ChangeInformation = ({ navigation }) => {
             <Text style={styles.textLeft}>Email</Text>
             <TextInput
               style={styles.textRight}
-              value={email}
+              placeholder='Email'
               onChangeText={(text) => setEmail(text)}
               onFocus={() => setEmailFocused(true)}
               onBlur={() => setEmailFocused(false)}
-              multiline={true}
-              numberOfLines={2}
             />
-            <TouchableOpacity onPress={() => handleReset('email')}>
-              <Ionicons name="refresh" size={20} color="black" />
+            <TouchableOpacity style={[{padding: 15}]} onPress={() => handleReset('email')}>
+              <Ionicons name="refresh" size={20} color="black"/>
             </TouchableOpacity>
           </View>
         </View>
@@ -178,7 +176,7 @@ const ChangeInformation = ({ navigation }) => {
         {/* Save */}
         <KeyboardAvoidingView style={styles.keyboardAvoidingContainer}>
           <TouchableOpacity style={styles.borderButtonSave} onPress={handleSavePress}>
-            <Text style={styles.textinButonSave}>Save</Text>
+            <Text style={[styles.textinButonSave]}>Save</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </SafeAreaView>
@@ -198,7 +196,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 20,
     backgroundColor:Colors.background,
-    paddingBottom:15,
+    paddingBottom:10,
     },
     headerTextContainer: {
     flexDirection: 'row',
@@ -208,7 +206,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginLeft: 10,
-    textAlign:'center',
+    textAlign:'left',
     flex:1,
     },
   containerText: {
@@ -218,22 +216,23 @@ const styles = StyleSheet.create({
     width:'auto',
   },
   textLeft: {
+    padding:15,
     flex: 1,
     fontSize: 14,
     textAlign: 'left',
+    alignSelf:'center',
   },
   textRight: {
-    flex: 1,
+    padding:15,
+    flex: 2,
+    color: 'gray',
     fontSize: 14,
-    marginLeft:-50,
-    fontWeight: 'bold',
     textAlign: 'left',
-    textDecorationLine: 'underline',
   },
   textContainer: {
+    height:70,
     flexDirection:'row',
     backgroundColor:Colors.background,
-    padding:15,
     borderWidth:1,
     borderColor:Colors.silver,
     marginLeft:10,

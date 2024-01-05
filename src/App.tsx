@@ -21,6 +21,9 @@ import ChangeInformationScreen from './pages/More/Profile/ChangeInformationScree
 import ResetPasswordScreen from './pages/More/Profile/ResetPasswordScreen';
 import ProductSreen from './pages/Products/ProductScreen';
 import NewProductScreen from './pages/Products/NewProductScreen';
+import DetailProductScreen from './pages/Products/DetailProductScreen';
+import InvoicesScreen from './pages/Invoices/InvoicesScreen';
+import DetailInvoicesScreen from './pages/Invoices/DetailInvoicesScreen';
 StatusBar.setBarStyle('dark-content');
 StatusBar.setBackgroundColor('white');
 
@@ -59,6 +62,17 @@ const HomeTabs = ({ isLoggedIn }) => {
         }}
       />
       <Tab.Screen
+        name="Invoices"
+        component={InvoicesScreen}
+        options={{
+          tabBarLabel: 'Invoices',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="document-text" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="Product"
         component={ProductSreen}
         options={{
@@ -70,15 +84,15 @@ const HomeTabs = ({ isLoggedIn }) => {
         }}
       />
       <Tab.Screen
-  name="MoreScreen"
-  options={{
-    tabBarLabel: 'More',
-    headerShown: false,
-    tabBarIcon: ({ color, size }) => (
-      <Ionicons name="list" size={size} color={color} />
-    ),
-  }}
->
+        name="MoreScreen"
+        options={{
+          tabBarLabel: 'More',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="list" size={size} color={color} />
+          ),
+        }}
+    >
   {({ navigation, route }) => (
     <ProfileScreen
       isLoggedIn={isLoggedIn}
@@ -116,6 +130,9 @@ const App = () => {
             <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} /> 
 
             <Stack.Screen name="NewProduct" component={NewProductScreen} /> 
+            <Stack.Screen name="DetailProduct" component={DetailProductScreen} /> 
+
+            <Stack.Screen name="DetailInvoices" component={DetailInvoicesScreen} /> 
           </Stack.Navigator>
         </NavigationContainer>
        </PaperProvider>
